@@ -51,22 +51,28 @@ public class MedicamentoController {
 	     catch (Exception ex) {
 	       	return "Erro ao fazer updating do: " + ex.toString();
 	     }
-	        return "Atualização feita com sucesso!";
+	        return "Meciamento atualizado com sucesso!";
 	     } 
 	 
 	 @RequestMapping("/get-medicamento")
      @ResponseBody
-     public String getId(long id) {
-    	 String medicamentoId;
-         try {
+     public Medicamento getId(long id) throws Exception {
+    	 
+		 try {
         	 Medicamento medicamento = medicamentoDao.getById(id);
-        	 medicamentoId = String.valueOf(medicamento.getId());
+        	 
+        	 if(medicamento == null){
+        		 throw new Exception("N�o existe");
+        	 }
+        	         	 
+        	 return medicamento;
          }
          catch (Exception e) {
-        	 return "Usuário não existe: " + e.toString();
+        	 throw new Exception("Erro ao consultar medicamento");
          }
-         	 return "Usuário cpf exite: " + medicamentoId;
-     }
+         
+	 }
+	 
 	 
 	@Autowired
     private MedicamentoDao medicamentoDao;

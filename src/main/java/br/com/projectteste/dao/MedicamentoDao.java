@@ -43,20 +43,22 @@ public class MedicamentoDao {
 		    return;
 		  }
 	
-	public Medicamento getById(long id) {
-		    return entityManager.find(Medicamento.class, id);
-		  }
 	 
-	@SuppressWarnings("unchecked")
-    public List getAll() {
-	    return entityManager.createQuery("from Medicamento").getResultList();
-	  }
 	
-	public Paciente getByCpf(String nomeMedicamento){
+	public Paciente getByNomeMedicamento(String nomeMedicamento){
 		return (Paciente) entityManager.createQuery(
 				"from Medicamento where nome_medicamento = :nomeMedicamento")
 				.setParameter("nomeMedicamento", nomeMedicamento)
 				.getSingleResult();		
+	}
+
+	public Medicamento getById(long id) {
+		return entityManager.find(Medicamento.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List <Medicamento> getAll() {
+		return entityManager.createQuery("from Medicamento").getResultList();
 	}
 	  
 	@PersistenceContext

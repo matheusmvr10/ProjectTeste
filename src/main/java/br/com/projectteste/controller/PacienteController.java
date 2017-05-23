@@ -25,7 +25,7 @@ public class PacienteController {
 			return "Erro ao criar paciente:" + e.toString();
 		}	
 		
-			return "Usuário criado com sucesso";
+			return "Usu�rio criado com sucesso";
 				
 	}
 	
@@ -46,17 +46,23 @@ public class PacienteController {
        
      @RequestMapping("/get-cpf")
      @ResponseBody
-     public String getCpf(double cpf) {
-    	 String pacienteId;
+     public Paciente getCpf(double cpf) throws Exception {
+    	
          try {
         	 Paciente paciente = pacienteDao.getCpf(cpf);
-             pacienteId = String.valueOf(paciente.getId());
+        	 
+        	 if(paciente == null){
+        		 throw new Exception("N�o existe");
+        	 }
+
+             return paciente;
+             
          }
          catch (Exception e) {
-        	 return "Usuário não existe: " + e.toString();
+        	 throw new Exception("Erro ao consultar paciente");
          }
-         	 return "Usuário cpf exite: " + pacienteId;
-         }
+         	
+     }
                                 
          
          
