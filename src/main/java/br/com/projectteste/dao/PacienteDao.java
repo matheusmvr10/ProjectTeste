@@ -58,8 +58,10 @@ public class PacienteDao{
 	 }
 	
 	 @SuppressWarnings("unchecked")
-	 public List getAll() {
-	    return entityManager.createQuery("from pacientes").getResultList();
+	public List <Paciente> getAll() {
+		 
+	    return (List <Paciente>)entityManager.createQuery("from pacientes").getResultList();
+	    
 	  }
 	
 	 public Paciente getId(long id) {

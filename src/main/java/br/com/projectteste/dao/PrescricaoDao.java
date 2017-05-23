@@ -58,7 +58,7 @@ public class PrescricaoDao {
 	
 	
 	 @SuppressWarnings("unchecked")
-	 public List getAll() {
+	 public List <Prescricao> getAll() {
 	    return entityManager.createQuery("from Prescricao").getResultList();
 	  }
 	

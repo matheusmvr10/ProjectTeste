@@ -22,10 +22,10 @@ public class PrescricaoController {
 			
 			
 		} catch (Exception e) {
-			return "Erro ao criar prescri√ß√£o:" + e.toString();
+			return "Erro ao criar prescriÁ„o:" + e.toString();
 		}	
 		
-			return "Prescri√ß√£o criada com sucesso";
+			return "PrescriÁ„o criada com sucesso";
 				
 	}
 	
@@ -37,24 +37,30 @@ public class PrescricaoController {
 			prescricaoDao.deletarPrescricao(prescricao);
                                  }
 		catch (Exception ex) {
-			return "Erro ao deletar prescri√ß√£o: " + ex.toString();
+			return "Erro ao deletar prescriÁ„o: " + ex.toString();
         }
-        	return "Prescri√ß√£o deletada com sucesso!";
+        	return "PrescriÁ„o deletada com sucesso!";
     }  
        
        
      @RequestMapping("/get-prescricao")
      @ResponseBody
-     public String getId(long id) {
-    	 String prescricaoId;
-         try {
+     public Prescricao getId(long id) throws Exception {
+    	
+    	 try {
         	 Prescricao prescricao = prescricaoDao.getId(id);
-        	 prescricaoId = String.valueOf(prescricao.getId());
+
+        	 if(prescricao == null){
+        		 throw new Exception("N„o existe");
+        	 }
+
+        	 
+        	 return prescricao;
          }
          catch (Exception e) {
-        	 return "Prescri√ß√£o n√£o existe: " + e.toString();
+        	 throw new Exception("Erro ao consultar prescriÁ„o");
          }
-         	 return "Prescri√ß√£o exite: " +prescricaoId;
+         
          }
                                 
          
